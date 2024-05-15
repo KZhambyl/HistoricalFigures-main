@@ -1,0 +1,2 @@
+CREATE INDEX IF NOT EXISTS figures_name_idx ON figures USING GIN (to_tsvector('simple', name));
+CREATE INDEX IF NOT EXISTS figures_years_of_life_idx ON figures USING GIN (to_tsvector('simple', years_of_life));
