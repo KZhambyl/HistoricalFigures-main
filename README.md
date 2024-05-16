@@ -11,6 +11,14 @@ POST /v1/figures
 GET /v1/figures/:id
 PUT /v1/figures/:id
 DELETE /v1/figures/:id
+
+GET /v1/healthcheck
+POST /v1/categories
+GET /v1/categories/:id
+PUT /v1/categories/:id
+DELETE /v1/categories/:id
+
+GET /v1/categories/:id/figures
 ```
 # DB Structure
 ```
@@ -24,6 +32,21 @@ Table figures {
 }
 ```
 ```
+Table categories {
+    id bigserial [primary key]
+    created_at timestamp
+    name text
+    version integer
+}
+```
+```
+Table figures_categories {
+    figure_id bigint NOT NULL REFERENCES figures
+    category_id bigint NOT NULL REFERENCES categories
+    PRIMARY KEY (figure_id, category_id)
+}
+```
+```
 Table schema_migrations {
     version bigint
     dirty boolean
@@ -31,19 +54,19 @@ Table schema_migrations {
 ```
 ```
 Table tokens {
-    hash bytea PRIMARY KEY,
-    user_id bigint NOT NULL REFERENCES users ON DELETE CASCADE,
-    expiry timestamp(0) with time zone NOT NULL,
-    scope text NOT NULL
+    hash bytea [primary key]
+    user_id bigint
+    expiry timestamp
+    scope text
 }
 ```
 ```
 Table users {
-    id bigserial PRIMARY KEY,
-    created_at timestamp(0) with time zone NOT NULL DEFAULT NOW(),
-    name text NOT NULL,
-    email citext UNIQUE NOT NULL,
-    password_hash bytea NOT NULL,
-    activated bool NOT NULL,
-    version integer NOT NULL DEFAULT 1
+    id bigserial [primary key]
+    created_at timestamp
+    name text
+    email citext
+    password_hash bytea
+    activated bool
+    version integer
 }
