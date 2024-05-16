@@ -110,9 +110,11 @@ func (app *application) updateFigureHandler(w http.ResponseWriter, r *http.Reque
 	if input.Name != nil {
 		figure.Name = *input.Name
 	}
+
 	if input.YearsOfLife != nil {
 		figure.YearsOfLife = *input.YearsOfLife
 	}
+
 	if input.Description != nil {
 		figure.Description = *input.Description
 	}
@@ -146,6 +148,7 @@ func (app *application) deleteFigureHandler(w http.ResponseWriter, r *http.Reque
 		app.notFoundResponse(w, r)
 		return
 	}
+
 	err = app.models.Figures.Delete(id)
 	if err != nil {
 		switch {
@@ -156,6 +159,7 @@ func (app *application) deleteFigureHandler(w http.ResponseWriter, r *http.Reque
 		}
 		return
 	}
+
 	err = app.writeJSON(w, http.StatusOK, envelope{"message": "figure successfully deleted"}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
@@ -168,6 +172,7 @@ func (app *application) listFiguresHandler(w http.ResponseWriter, r *http.Reques
 		YearsOfLife string
 		data.Filters
 	}
+
 	v := validator.New()
 	qs := r.URL.Query()
 

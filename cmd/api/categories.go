@@ -134,6 +134,7 @@ func (app *application) deleteCategoryHandler(w http.ResponseWriter, r *http.Req
 		app.notFoundResponse(w, r)
 		return
 	}
+
 	err = app.models.Categories.Delete(id)
 	if err != nil {
 		switch {
@@ -144,6 +145,7 @@ func (app *application) deleteCategoryHandler(w http.ResponseWriter, r *http.Req
 		}
 		return
 	}
+
 	err = app.writeJSON(w, http.StatusOK, envelope{"message": "category successfully deleted"}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
@@ -155,6 +157,7 @@ func (app *application) listCategoriesHandler(w http.ResponseWriter, r *http.Req
 		Name string
 		data.Filters
 	}
+
 	v := validator.New()
 	qs := r.URL.Query()
 
@@ -195,6 +198,7 @@ func (app *application) showCategoryFiguresHandler(w http.ResponseWriter, r *htt
 		YearsOfLife string
 		data.Filters
 	}
+
 	v := validator.New()
 	qs := r.URL.Query()
 
