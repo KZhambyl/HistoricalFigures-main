@@ -91,14 +91,6 @@ func (app *application) readString(qs url.Values, key string, defaultValue strin
 	return s
 }
 
-func (app *application) readCSV(qs url.Values, key string, defaultValue []string) []string {
-	csv := qs.Get(key)
-	if csv == "" {
-		return defaultValue
-	}
-	return strings.Split(csv, ",")
-}
-
 func (app *application) readInt(qs url.Values, key string, defaultValue int, v *validator.Validator) int {
 	s := qs.Get(key)
 	if s == "" {
@@ -111,17 +103,4 @@ func (app *application) readInt(qs url.Values, key string, defaultValue int, v *
 		return defaultValue
 	}
 	return i
-}
-
-func (app *application) background(fn func()) {
-	app.wg.Add(1)
-	go func() {
-		defer app.wg.Done()
-		defer func() {
-			if err := recover(); err != nil {
-				app.logger.PrintError(fmt.Errorf("%s", err), nil)
-			}
-		}()
-		fn()
-	}()
 }

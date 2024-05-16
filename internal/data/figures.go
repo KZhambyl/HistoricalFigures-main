@@ -22,6 +22,7 @@ type Figure struct {
 func ValidateFigure(v *validator.Validator, f *Figure) {
 	v.Check(f.Name != "", "name", "must be provided")
 	v.Check(len(f.Name) <= 500, "name", "must not be more than 500 bytes long")
+	v.Check(len(f.Description) > 0, "description", "must not be empty")
 	v.Check(len(f.Description) <= 1000, "description", "must not be more than 1000 bytes long")
 	v.Check(len(f.YearsOfLife) <= 9, "years_of_life", "must not be more than 10 bytes long")
 	v.Check(len(f.YearsOfLife) > 0, "years_of_life", "must not be empty")
