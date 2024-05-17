@@ -57,6 +57,6 @@ vendor:
 build/api:
 	@echo 'Building cmd/api...'
 	go build -ldflags='-s' -o=./bin/api ./cmd/api
-	set GOOS=windows 
+	set GOOS=linux 
 	set GOARCH=amd64 
-	go build -ldflags='-s' -o=./bin/windows_amd64/api ./cmd/api
+	go build -ldflags='-s' -o=./bin/linux_amd64/api ./cmd/api
