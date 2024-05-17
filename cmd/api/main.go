@@ -58,7 +58,7 @@ func main() {
 		return nil
 	})
 
-	flag.StringVar(&cfg.jwt.secret, "jwt-secret", "", "JWT secret")
+	flag.StringVar(&cfg.jwt.secret, "jwt-secret", "673ba70af71a07354f8fcf707066b31095fcfe753f66b1330682f73779e24002", "JWT secret")
 
 	displayVersion := flag.Bool("version", false, "Display version and exit")
 	flag.Parse()
