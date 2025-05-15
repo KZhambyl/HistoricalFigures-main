@@ -1,4 +1,3 @@
-# Go_midterm
 # Project description
 ```
 Mini site like wiki with short informations about significant figures of Kazakh history: Name, Years of life and description of figure.
